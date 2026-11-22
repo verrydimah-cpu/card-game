@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emberfall Duel — a card battler</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="table">
+  <header id="topbar">
+    <div class="brand">🔥 EMBERFALL <span>DUEL</span></div>
+    <div class="top-stats">
+      <div class="stat">Turn <b id="turn-num">1</b></div>
+      <div class="stat">Score <b id="score-num">0</b></div>
+      <div class="stat">Cards played <b id="played-num">0</b></div>
+    </div>
+    <button id="restart-btn" class="ghost-btn" type="button">↻ Restart</button>
+  </header>
+
+  <section id="enemy-zone">
+    <div id="enemy-portrait" aria-label="Ashen Warden">
+      <svg viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Ashen Warden">
+        <circle cx="60" cy="60" r="56" fill="#2a1a2e" stroke="#ff7a2f" stroke-width="3"/>
+        <path d="M60 18 C74 40 88 48 88 70 A28 28 0 1 1 32 70 C32 48 46 40 60 18 Z" fill="#ff7a2f"/>
+        <path d="M60 42 C68 54 76 58 76 72 A16 16 0 1 1 44 72 C44 58 52 54 60 42 Z" fill="#ffd23f"/>
+        <circle cx="50" cy="66" r="4" fill="#1a0f14"/>
+        <circle cx="70" cy="66" r="4" fill="#1a0f14"/>
+        <path d="M50 82 Q60 90 70 82" stroke="#1a0f14" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div class="foe-name">ASHEN WARDEN</div>
+      <div class="foe-title">Keeper of the Last Ember</div>
+    </div>
+    <div id="enemy-panel">
+      <div class="hp-row">
+        <span class="hp-label">❤ HP</span>
+        <div class="hp-bar"><div id="enemy-hp-fill" class="hp-fill enemy"></div></div>
+        <span id="enemy-hp-text" class="hp-text">32 / 32</span>
+        <span id="enemy-block" class="block-badge" hidden>🛡 0</span>
+      </div>
+      <div id="enemy-intent" class="intent">The Warden gathers embers…</div>
+      <div id="enemy-burn" class="burn-badge" hidden>🔥 Burning 0</div>
+      <div id="enemy-hand" class="foe-hand" aria-label="Enemy hand"></div>
+    </div>
+  </section>
+
+  <section id="mid-row">
+    <div id="piles">
+      <div class="pile" id="draw-pile"><div class="pile-count" id="draw-count">20</div><div class="pile-label">DRAW PILE</div></div>
+      <div class="pile discard" id="discard-pile"><div class="pile-count" id="discard-count">0</div><div class="pile-label">DISCARD</div></div>
+    </div>
+    <div id="log" aria-live="polite"></div>
+    <div id="energy-box">
+      <div class="energy-label">ENERGY</div>
+      <div id="energy-pips" class="energy-pips"></div>
+      <button id="end-turn-btn" class="end-btn" type="button">End Turn ⏎</button>
+    </div>
+  </section>
+
+  <section id="player-zone">
+    <div id="player-panel">
+      <div class="player-name">🔥 YOU — EMBER KNIGHT</div>
+      <div class="hp-row">
+        <span class="hp-label">❤ HP</span>
+        <div class="hp-bar"><div id="player-hp-fill" class="hp-fill player"></div></div>
+        <span id="player-hp-text" class="hp-text">40 / 40</span>
+        <span id="player-block" class="block-badge" hidden>🛡 0</span>
+      </div>
+      <div id="player-burn" class="burn-badge" hidden>🔥 Burning 0</div>
+      <div id="player-hint">Click a card to play it · keys 1–6 play · E ends turn</div>
+    </div>
+  </section>
+
+  <section id="hand" aria-label="Your hand"></section>
+
+  <div id="overlay" class="overlay">
+    <div class="overlay-card" id="overlay-card">
+      <div id="overlay-kicker" class="overlay-kicker">A DUEL OF EMBERS</div>
+      <h1 id="overlay-title">EMBERFALL<br>DUEL</h1>
+      <p id="overlay-text">The Ashen Warden holds the last ember of the realm. Build your hand, spend your energy, and strike him down before his flames consume you.</p>
+      <div id="overlay-stats" class="overlay-stats" hidden></div>
+      <button id="overlay-btn" class="big-btn" type="button">⚔ Begin the Duel</button>
+      <div id="overlay-rules" class="overlay-rules">
+        <div><b>♦ Strike</b> deals damage · <b>♣ Guard</b> blocks · <b>♥ Mend</b> heals</div>
+        <div><b>♠ Cleave</b> hits hard · <b>🔥 Ember</b> burns over time · <b>✦ Focus</b> draws cards</div>
+        <div>3 energy each turn · 5 cards drawn · win by reducing the Warden to 0 HP</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="cards.js"></script>
+<script src="engine.js"></script>
+<script src="ui.js"></script>
+<script src="shots.js"></script>
+</body>
+</html>
